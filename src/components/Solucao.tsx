@@ -11,32 +11,32 @@ const steps = [
   },
   {
     n: "03",
-    title: "Diagnóstico DRPS",
+    title: "Aplicação do DRPS",
     desc: "Aplicação do diagnóstico de riscos psicossociais de forma coletiva e anonimizada.",
   },
   {
     n: "04",
-    title: "Análise por setores",
+    title: "Análise por fatores e setores",
     desc: "Leitura dos dados por área quando houver amostra suficiente para preservar anonimato.",
   },
   {
     n: "05",
-    title: "Matriz de risco",
+    title: "Relatório técnico",
     desc: "Classificação dos fatores identificados por gravidade, probabilidade e nível final.",
   },
   {
     n: "06",
-    title: "Relatórios e evidências",
+    title: "Indicação de programas de intervenção",
     desc: "Organização dos resultados em relatórios claros com recomendações e evidências para gestão.",
   },
   {
     n: "07",
-    title: "Recomendações preliminares",
+    title: "Programas contínuos",
     desc: "Orientações iniciais para priorização de ações preventivas e corretivas.",
   },
   {
     n: "08",
-    title: "Programas preventivos e corretivos",
+    title: "Acompanhamento e revisão",
     desc: "Estruturação de programas adaptados à realidade identificada no diagnóstico.",
   },
 ];
@@ -56,12 +56,13 @@ export default function Solucao() {
             Como funciona
           </p>
           <h2 className="text-3xl lg:text-4xl font-extrabold text-[#1F2A2E] leading-tight mb-5">
-            Como a RN1 apoia a implementação da NR-1
+            Como o DRPS e os programas de intervenção apoiam a implementação da NR-1
           </h2>
           <p className="text-[1.05rem] text-[#4A4A46] leading-relaxed">
-            A RN1 estrutura uma jornada prática para apoiar empresas na identificação,
-            avaliação e gestão dos riscos psicossociais, conectando diagnóstico,
-            análise, relatórios e programas de intervenção.
+            O DRPS estrutura o diagnóstico dos riscos psicossociais por meio de uma
+            avaliação coletiva e organizacional. Após a avaliação, o relatório consolida
+            os resultados e aponta os programas de intervenção mais adequados conforme
+            os riscos identificados.
           </p>
         </div>
 

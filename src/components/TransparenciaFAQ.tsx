@@ -42,8 +42,8 @@ const faqs = [
     a: "Os resultados são analisados, classificados e transformados em recomendações preliminares, relatórios e possíveis programas de intervenção.",
   },
   {
-    q: "A RN1 também oferece programas de prevenção?",
-    a: "Sim. Os programas podem ser adaptados conforme riscos identificados, porte da empresa e necessidades dos setores.",
+    q: "O DRPS também oferece programas de prevenção?",
+    a: "O DRPS é o Diagnóstico de Riscos Psicossociais. Após a avaliação, é elaborado um relatório completo com os fatores identificados. A partir desse resultado, são apontados os programas de intervenção e prevenção mais adequados para a realidade da empresa. O DRPS não é um programa de intervenção em si; ele é a etapa de diagnóstico.",
   },
   {
     q: "O colaborador precisa fazer login?",
@@ -167,7 +167,7 @@ export default function TransparenciaFAQ() {
                 href="#contato"
                 className="inline-flex items-center gap-2 text-sm font-semibold text-[#315C4B] hover:text-[#2F7D7E] transition-colors"
               >
-                Ainda tem dúvidas? Fale com a RN1
+                Ainda tem dúvidas? Fale conosco
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>

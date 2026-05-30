@@ -41,7 +41,7 @@ export default function Header() {
             RN1
           </span>
           <span className="hidden sm:inline-block text-xs font-medium text-[#8FAF9B] border border-[#DDEBE3] rounded-full px-2.5 py-0.5 bg-[#DDEBE3]/60">
-            NR-1 & Riscos Psicossociais
+            NR-1 e Programas Contínuos
           </span>
         </a>
 

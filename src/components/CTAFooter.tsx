@@ -37,9 +37,8 @@ export default function CTAFooter() {
               Sua empresa está pronta para organizar a gestão dos riscos psicossociais?
             </h2>
             <p className="text-[1.05rem] text-[#DDEBE3] leading-relaxed mb-10">
-              Fale com a RN1 e entenda como estruturar diagnóstico, relatórios e ações
-              preventivas para apoiar sua empresa na gestão dos fatores psicossociais
-              relacionados ao trabalho.
+              Fale conosco e entenda como estruturar o DRPS, os relatórios técnicos e os
+              programas contínuos de intervenção para apoiar sua empresa.
             </p>
 
             {/* Buttons */}

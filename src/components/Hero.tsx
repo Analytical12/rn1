@@ -78,8 +78,8 @@ export default function Hero() {
             {/* Subtitle */}
             <p className="text-[1.05rem] text-[#4A4A46] leading-relaxed max-w-[520px]">
               A RN1 apoia empresas na identificação, organização e gestão dos fatores
-              psicossociais relacionados ao trabalho, com diagnóstico estruturado,
-              relatórios, evidências e programas preventivos.
+              psicossociais relacionados ao trabalho, por meio do DRPS, relatórios
+              técnicos e programas contínuos de intervenção.
             </p>
 
             {/* CTAs */}

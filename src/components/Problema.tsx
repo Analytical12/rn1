@@ -73,7 +73,7 @@ export default function Problema() {
             adoecimento emocional impactam pessoas, produtividade, clima e gestão.
           </p>
           <p className="text-[1.05rem] text-[#4A4A46] leading-relaxed mt-3">
-            A RN1 ajuda empresas a organizar esse processo com método, escuta
+            O DRPS ajuda empresas a organizar esse processo com método, escuta
             estruturada, análise por fatores e relatórios que apoiam decisões
             responsáveis.
           </p>
