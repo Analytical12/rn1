@@ -6,7 +6,7 @@ import { LandingHeader } from "@/components/site/LandingHeader";
 import { PendingNote } from "@/components/site/Pending";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { TrackView } from "@/components/site/TrackView";
-import { formatPrice, getOffer, priceStatusLabel, shouldShowPrice } from "@/config/offers";
+import { confirmedPrice, formatPrice, getOffer, priceStatusLabel, shouldShowPrice } from "@/config/offers";
 import { isPageListed, pageMetadata, pages } from "@/config/pages";
 import { isReview } from "@/config/site";
 import { comboExtras, ebookGroups, ebooks } from "@/content/perfil-e-proposito";
@@ -77,7 +77,7 @@ export default function PerfilPropositoPage() {
         productId={offer.id}
         pageType="product"
         currency={price?.currency}
-        value={price && price.status === "current" ? price.amount : undefined}
+        value={confirmedPrice(offer) ?? undefined}
       />
       <LandingHeader brand="carla" cta={{ href: "#oferta", label: "Ver oferta" }} />
 

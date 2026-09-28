@@ -1,4 +1,5 @@
 import { contacts, type ContactId } from "./contacts";
+import * as rules from "./offer-rules";
 import { isReview } from "./site";
 
 /**
@@ -214,18 +215,11 @@ export function getOffer(id: OfferId): Offer {
   return offers[id];
 }
 
-export function checkoutHref(offer: Offer): string | null {
-  if (!offer.checkout) return null;
-  try {
-    const url = new URL(offer.checkout.url);
-    return url.protocol === "https:" && !url.username && !url.password ? url.href : null;
-  } catch {
-    return null;
-  }
-}
+export { checkoutHref, confirmedPrice } from "./offer-rules";
 
+/** Produto pago: liberado + checkout válido + preço "current" finito e maior que zero. */
 export function isSellable(offer: Offer): boolean {
-  return offer.status === "published" && offer.conversion === "checkout" && checkoutHref(offer) !== null;
+  return rules.isSellable(offer);
 }
 
 export function isContactReady(offer: Offer): boolean {
@@ -234,17 +228,16 @@ export function isContactReady(offer: Offer): boolean {
 }
 
 export function isConversionReady(offer: Offer): boolean {
-  return offer.conversion === "checkout" ? isSellable(offer) : isContactReady(offer);
+  return rules.isConversionReady(offer, isContactReady(offer));
 }
 
 export function isIndexable(offer: Offer): boolean {
-  return offer.status === "published" && isConversionReady(offer);
+  return rules.isIndexable(offer, isContactReady(offer));
 }
 
-/** Em produção, preço só aparece em oferta liberada. Na revisão, sempre (com marcação). */
+/** Produção: só preço confirmado de oferta liberada. Revisão: também valores de trabalho (com marcação). */
 export function shouldShowPrice(offer: Offer): boolean {
-  if (!offer.price) return false;
-  return isReview || offer.status === "published";
+  return rules.shouldShowPrice(offer, isReview);
 }
 
 export function formatPrice(amount: number, currency = "BRL"): string {

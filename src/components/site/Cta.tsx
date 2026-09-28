@@ -1,5 +1,5 @@
 import { contacts, instagramHref, whatsappHref, type ContactId } from "@/config/contacts";
-import { checkoutHref, getOffer, isSellable, type OfferId } from "@/config/offers";
+import { checkoutHref, confirmedPrice, getOffer, isSellable, type OfferId } from "@/config/offers";
 import { isReview } from "@/config/site";
 
 type Variant = "primary" | "secondary";
@@ -32,7 +32,7 @@ export function CheckoutCTA({ offerId, position, label, variant = "primary", cla
         data-cta-position={position}
         data-destination-type="checkout"
         data-currency={price?.currency}
-        data-value={price && price.status === "current" ? price.amount : undefined}
+        data-value={confirmedPrice(offer) ?? undefined}
         data-forward-utm={offer.checkout?.forwardUtm ? "true" : undefined}
       >
         {label}
