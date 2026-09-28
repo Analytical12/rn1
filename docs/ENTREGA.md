@@ -26,7 +26,7 @@ NEXT_PUBLIC_SITE_MODE=production npm run build && npm start
 | `/advento-familia`, `/advento-igrejas` | 308 → rotas acima | — | — |
 | 404 | Página não encontrada real | `theme-carla` | Links para as frentes |
 
-- Next.js 16 (App Router), React 19, Tailwind 3. Sem CMS, banco ou novas dependências de runtime.
+- Next.js 16.3.3 (App Router), React 19, Tailwind 3. Sem CMS, banco ou novas dependências de runtime.
 - Temas por CSS variables escopadas (`src/app/globals.css`); nenhuma regra da NR-1 vale fora de `.theme-nr1`.
 - Fontes: Manrope (todas as páginas) e Fraunces (títulos fora da NR-1, carregada só no grupo `(site)` e na 404).
 - URL canônica sem barra final, host `https://www.carlagerhard.com` (é o único que aponta para a Vercel hoje).
@@ -125,7 +125,7 @@ Não medido: notas de Lighthouse/PageSpeed, leitor de tela real, Safari/iOS e An
 - `eslint` 8 → 9 (devDependency). `eslint-config-next@16` exige ESLint 9; o conflito estava oculto pelo `legacy-peer-deps`. `next lint` não existe mais no Next 16: o script agora é `eslint .`.
 - `tsconfig.json`: `allowImportingTsExtensions` (os testes usam o runner nativo do Node, sem novas dependências).
 - Novos scripts: `typecheck`, `test`.
-- `npm audit` (27/09/2026): 9 avisos em dependências que já existiam antes desta entrega. O crítico é o próprio `next@16.2.6` (mesma versão hoje em produção): *Middleware/Proxy bypass* e *DoS com Server Actions*. Este site não usa middleware, proxy nem Server Actions (todas as rotas são estáticas), mas **recomenda-se atualizar `next` para a versão 16.x corrigida numa etapa separada**, com build e testes. Os demais (`postcss`, `sharp`, `browserslist`, `nanoid`, `brace-expansion`, `@babel/core`) são de build/otimização de imagem. Nenhuma atualização foi feita aqui.
+- Segurança: `next` 16.2.6 → 16.3.3 e correções de lockfile sem `--force`; `npm audit` passou de 9 avisos (1 crítico) para 0. Detalhes, condições de exploração e limitações em [`SEGURANCA.md`](./SEGURANCA.md).
 
 ## Situação inicial registrada
 
