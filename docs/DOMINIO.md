@@ -13,7 +13,9 @@ Nada foi alterado em DNS, nameservers, e-mail, Vercel ou `.com.br`.
 | `carlagerhard.com` (apex) | `A 2.57.91.91` → página "Parked Domain" da Hostinger em HTTP; HTTPS não responde | `dig A`, `curl` |
 | `www.carlagerhard.com` | `CNAME f14b64883b8388ca.vercel-dns-017.com` → site na Vercel | `dig CNAME`, cabeçalho `server: Vercel` |
 | MX / TXT do apex | nenhum registro retornado | `dig MX`, `dig TXT` |
-| Projeto na Vercel | não está na conta Vercel conectada nesta sessão (time "Tech space"); provavelmente na conta de Carla | API da Vercel (leitura) |
+| Projeto na Vercel | `rn1` (`prj_OBz8xfarBXF8IrwEd2L3X2i6xNvy`), conta "adobecarla81-8601's projects", Git `Analytical12/rn1`, branch de produção `main` | API da Vercel (leitura, 27/09/2026) |
+| `carlagerhard.com` no projeto | Já cadastrado, com redirecionamento para `www.carlagerhard.com` (código HTTP não definido); status **misconfigured** porque o A aponta para `2.57.91.91` | `/v9/projects/rn1/domains`, `/v6/domains/carlagerhard.com/config` |
+| Registro recomendado pela Vercel para o apex | **A `216.198.79.1` e A `64.29.17.1`** (prioridade 1; alternativa: A `76.76.21.21`) | `/v6/domains/carlagerhard.com/config` |
 
 ## O que já está pronto no código
 
@@ -25,9 +27,9 @@ Nada foi alterado em DNS, nameservers, e-mail, Vercel ou `.com.br`.
 
 ## Passos para a pessoa com acesso ao projeto na Vercel e à Hostinger
 
-1. **Vercel → projeto do site → Settings → Domains**: confirmar que `www.carlagerhard.com` é o domínio de produção. Adicionar `carlagerhard.com` e escolher **Redirect to `www.carlagerhard.com`** (308).
-2. A Vercel vai exibir o registro que falta para o apex (tipo e valor). **Copiar exatamente esse valor.** Não usar IPs de documentação ou de outros projetos.
-3. **Hostinger → DNS de `carlagerhard.com`**: substituir somente o registro `A` do apex (`@`, hoje `2.57.91.91`) pelo valor indicado pela Vercel. Manter o CNAME do `www`.
+1. **Vercel → projeto `rn1` → Settings → Domains**: `carlagerhard.com` já está cadastrado com redirecionamento para `www.carlagerhard.com`. Recomenda-se escolher o código **308 (permanente)**; hoje o campo está sem valor definido.
+2. Conferir no mesmo painel o registro indicado para o apex. Em 27/09/2026 a Vercel indicava **A `216.198.79.1`** e **A `64.29.17.1`**. Se o painel mostrar outro valor no dia da mudança, vale o do painel.
+3. **Hostinger → DNS de `carlagerhard.com`**: substituir somente o registro `A` do apex (`@`, hoje `2.57.91.91`) pelos registros indicados pela Vercel. Manter o CNAME do `www` (`f14b64883b8388ca.vercel-dns-017.com`).
 4. Não trocar nameservers. Não apagar registros de e-mail (MX, SPF, DKIM, DMARC) se forem criados até lá; hoje não há nenhum.
 5. Aguardar a propagação e conferir:
 
