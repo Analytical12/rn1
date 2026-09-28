@@ -21,9 +21,26 @@ const config: Config = {
         "rn-mint": "#DDEBE3",
         "rn-mist": "#DDEAF0",
         "rn-terra": "#B9785F",
+        // Tokens semânticos: o valor vem do tema da seção (.theme-* em globals.css)
+        paper: "var(--paper)",
+        "paper-2": "var(--paper-2)",
+        panel: "var(--panel)",
+        ink: "var(--ink)",
+        copy: "var(--text)",
+        muted: "var(--muted)",
+        line: "var(--line)",
+        accent: "var(--accent)",
+        "accent-hover": "var(--accent-hover)",
+        "accent-soft": "var(--accent-soft)",
+        rose: "var(--rose)",
+        "rose-soft": "var(--rose-soft)",
       },
       fontFamily: {
         sans: ["var(--font-manrope)", "system-ui", "sans-serif"],
+      },
+      maxWidth: {
+        content: "1160px",
+        reading: "40rem",
       },
       animation: {
         "fade-in": "fadeIn 0.6s ease forwards",
@@ -43,9 +60,6 @@ const config: Config = {
           "0%, 100%": { transform: "translateY(0px)" },
           "50%": { transform: "translateY(-8px)" },
         },
-      },
-      maxWidth: {
-        "content": "1160px",
       },
     },
   },
