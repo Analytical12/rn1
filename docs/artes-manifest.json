@@ -1,0 +1,123 @@
+{
+  "versao": "2026-09-27",
+  "regras": [
+    "Substituir o arquivo mantendo nome, formato e proporção: o layout não muda.",
+    "Não gerar nem alterar o rosto de Carla Gerhard. Fotos sempre oficiais.",
+    "Não inventar capas, páginas de produto ou logos.",
+    "Textos comerciais, preços e CTAs ficam no HTML, nunca dentro da imagem."
+  ],
+  "itens": [
+    {
+      "id": "carla-retrato-home",
+      "rota": "/",
+      "secao": "Hero",
+      "arquivo": "public/images/carla/carla-blazer-branco.webp",
+      "proporcao": "0.58 (retrato vertical)",
+      "dimensao_recomendada": "1300x2250",
+      "posicao": "Coluna direita, ancorada na base da seção, sobre arco verde-claro desenhado em CSS",
+      "fundo_transparente": true,
+      "area_segura": "Rosto e mãos entre 10% e 45% da altura; nada cortado nas laterais",
+      "prompt": "Não gerar. Solicitar a foto oficial original (sem compressão) desta mesma sessão, com fundo removido.",
+      "fallback": "Arquivo atual (866x1500, recorte da foto oficial do site antigo)",
+      "prioridade": "media"
+    },
+    {
+      "id": "carla-sorrindo",
+      "rota": "/ e /perfil-e-proposito",
+      "secao": "Sobre / Autora",
+      "arquivo": "public/images/carla/carla-sorrindo.webp",
+      "proporcao": "1.06 (quase quadrada)",
+      "dimensao_recomendada": "1600x1510",
+      "posicao": "Coluna esquerda, cantos arredondados em CSS",
+      "fundo_transparente": false,
+      "area_segura": "Rosto centralizado no terço superior; margem de 8% em todos os lados",
+      "prompt": "Não gerar. Solicitar a foto oficial original em alta resolução.",
+      "fallback": "Arquivo atual (888x840, do site antigo)",
+      "prioridade": "media"
+    },
+    {
+      "id": "carla-retrato-analise",
+      "rota": "/analise-comportamental",
+      "secao": "Hero",
+      "arquivo": "public/images/carla/carla-camisa-laranja.webp",
+      "proporcao": "0.47 (retrato vertical)",
+      "dimensao_recomendada": "1100x2340",
+      "posicao": "Coluna direita, ancorada na base, sobre painel rosa (#f6c7cb) desenhado em CSS",
+      "fundo_transparente": true,
+      "area_segura": "Rosto entre 5% e 25% da altura",
+      "prompt": "Não gerar. Usar foto oficial com fundo removido.",
+      "fallback": "Arquivo atual (706x1500, recorte da foto oficial de 3200px do site antigo)",
+      "prioridade": "baixa"
+    },
+    {
+      "id": "pequenas-sementes-logo",
+      "rota": "/advento, /advento/familia, /advento/igrejas",
+      "secao": "Cabeçalho",
+      "arquivo": "public/images/advento/pequenas-sementes.webp (trocar por pequenas-sementes.svg e ajustar o src em src/components/site/LandingHeader.tsx)",
+      "proporcao": "2.28",
+      "dimensao_recomendada": "Vetorial (SVG) ou PNG 1140x500",
+      "posicao": "Canto superior esquerdo, altura de 44 a 48 px",
+      "fundo_transparente": true,
+      "area_segura": "Logo completo, sem margens extras",
+      "prompt": "Não gerar nem redesenhar. Solicitar o arquivo vetorial oficial da marca.",
+      "fallback": "Imagem atual extraída do PDF (503x221, com transparência). Confirmada pelo usuário em 27/09/2026 como a logo oficial. O JPG recebido (572x259, fundo branco) tem a mesma resolução e não substitui o arquivo.",
+      "prioridade": "alta"
+    },
+    {
+      "id": "advento-familia-amostras",
+      "rota": "/advento/familia",
+      "secao": "Capa e Por dentro do material",
+      "arquivo": "public/images/advento/familia/{capa,trilha,dia-03,capsula}.webp",
+      "proporcao": "1.414 (A4 paisagem)",
+      "dimensao_recomendada": "1600x1131",
+      "posicao": "Hero (capa) e galeria de três páginas",
+      "fundo_transparente": false,
+      "area_segura": "Página inteira, sem recorte",
+      "prompt": "Não gerar. Reexportar do PDF final da edição Família apenas se estas páginas mudarem: capa (p. 1), trilha (p. 16), 3º dia (p. 34), Cápsula do Advento (p. 113).",
+      "fallback": "Arquivos atuais, conferidos visualmente",
+      "prioridade": "condicional"
+    },
+    {
+      "id": "advento-igrejas-amostras",
+      "rota": "/advento/igrejas",
+      "secao": "Capa e Por dentro do material",
+      "arquivo": "public/images/advento/igrejas/{capa,professores,cartinhas,pais}.webp",
+      "proporcao": "1.414 (A4 paisagem)",
+      "dimensao_recomendada": "1600x1131",
+      "posicao": "Hero (capa) e galeria de três páginas",
+      "fundo_transparente": false,
+      "area_segura": "Página inteira, sem recorte",
+      "prompt": "Não gerar. Reexportar do PDF final da edição Igreja apenas se estas páginas mudarem: capa (p. 1), professores semana 1 (p. 26), cartinhas (p. 35), mensagem aos pais (p. 24). Não usar a página 41 (\"7 days of creation\", em inglês).",
+      "fallback": "Arquivos atuais, conferidos visualmente",
+      "prioridade": "condicional"
+    },
+    {
+      "id": "og-compartilhamento",
+      "rota": "todas",
+      "secao": "Open Graph (prévia em WhatsApp e redes)",
+      "arquivo": "public/og/{home,nr1,analise-comportamental,perfil-e-proposito,advento,advento-familia,advento-igrejas}.jpg",
+      "proporcao": "1.91",
+      "dimensao_recomendada": "1200x630",
+      "posicao": "Metadados, não aparece na página",
+      "fundo_transparente": false,
+      "area_segura": "Conteúdo principal no centro 1000x530 (algumas redes cortam as bordas)",
+      "prompt": "Opcional. Composição com a foto oficial ou a capa real + nome da página em uma linha. Sem parágrafos, preços ou promessas.",
+      "fallback": "Composições atuais sem texto, feitas com fotos e capas reais",
+      "prioridade": "baixa"
+    },
+    {
+      "id": "combo-capas-ebooks",
+      "rota": "/perfil-e-proposito",
+      "secao": "Hero (painel dos temas)",
+      "arquivo": "public/images/perfil-e-proposito/ebook-01.webp … ebook-16.webp (novos)",
+      "proporcao": "0.75 (capa vertical)",
+      "dimensao_recomendada": "600x800",
+      "posicao": "Exigiria trocar o painel tipográfico do hero por uma composição de capas (ajuste de layout)",
+      "fundo_transparente": false,
+      "area_segura": "Capa inteira",
+      "prompt": "Não gerar capas. Só usar se existirem capas reais dos 16 eBooks.",
+      "fallback": "Painel tipográfico com os quatro temas e a contagem real de títulos",
+      "prioridade": "futura"
+    }
+  ]
+}

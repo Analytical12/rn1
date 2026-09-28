@@ -2,31 +2,225 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ------------------------------------------------------------------
+   Base neutra. Cada seção do site define seus tokens num tema escopado
+   (.theme-*) para que regras de uma identidade não vazem para outra.
+   ------------------------------------------------------------------ */
+
 :root {
   --font-manrope: "Manrope", system-ui, sans-serif;
+  --paper: #ffffff;
+  --paper-2: #f5f5f4;
+  --ink: #1f2328;
+  --text: #3f454b;
+  --muted: #6b7177;
+  --line: #e4e2dd;
+  --accent: #3f6848;
+  --accent-hover: #2f5237;
+  --accent-soft: #e8efe9;
+  --on-accent: #ffffff;
+  --focus: #3f6848;
 }
 
-html {
-  scroll-behavior: smooth;
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 body {
-  background-color: #F7F5F0;
-  color: #4A4A46;
+  background-color: var(--paper);
+  color: var(--text);
   font-family: var(--font-manrope);
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-/* Intersection Observer reveal */
-.reveal {
+[id] {
+  scroll-margin-top: 88px;
+}
+
+*:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ------------------------------ Temas ------------------------------ */
+
+/* Carla Gerhard: editorial, adulto. Dialoga com o verde/rosa da análise. */
+.theme-carla {
+  --paper: #faf7f2;
+  --paper-2: #f1ece4;
+  --panel: #e5ede6;
+  --ink: #1d2327;
+  --text: #3f464b;
+  --muted: #646b70;
+  --line: #e0d9ce;
+  --accent: #3f6848;
+  --accent-hover: #2f5237;
+  --accent-soft: #e5ede6;
+  --rose: #f6c7cb;
+  --rose-soft: #fbe9ea;
+  --nr1: #1f5f68;
+  --focus: #3f6848;
+  --display-settings: "SOFT" 0, "WONK" 0;
+  --display-weight: 420;
+}
+
+/* NR-1 / RN1: paleta preservada do repositório. */
+.theme-nr1 {
+  --paper: #f7f5f0;
+  --text: #4a4a46;
+  --ink: #1f2a2e;
+  --focus: #2f7d7e;
+  background-color: #f7f5f0;
+  color: #4a4a46;
+}
+
+/* Análise comportamental e Perfil e Propósito: identidade do HTML fornecido. */
+.theme-pp {
+  --paper: #fffdfa;
+  --paper-2: #f3f7f3;
+  --panel: #eef5ef;
+  --ink: #1e293b;
+  --text: #334155;
+  --muted: #5b6678;
+  --line: #e6e8ec;
+  --accent: #4d7c57;
+  --accent-hover: #3f6848;
+  --accent-soft: #eef5ef;
+  --rose: #f6c7cb;
+  --rose-soft: #fdf0f1;
+  --focus: #4d7c57;
+  --display-settings: "SOFT" 30, "WONK" 0;
+  --display-weight: 560;
+}
+
+/* Pequenas Sementes: cores reais do logo e das páginas do Advento. */
+.theme-sementes {
+  --paper: #fffbf3;
+  --paper-2: #fff1dc;
+  --ink: #28242e;
+  --text: #45404b;
+  --muted: #6a6470;
+  --line: #eee1cc;
+  --s-green: #54b448;
+  --s-orange: #f06024;
+  --s-blue: #18a8e4;
+  --s-pink: #e42454;
+  --s-yellow: #f9c74f;
+  --accent: #2f7a34;
+  --accent-hover: #25622a;
+  --accent-soft: #eaf5e6;
+  --focus: #1b6fa0;
+  --display-settings: "SOFT" 100, "WONK" 1;
+  --display-weight: 640;
+}
+
+.theme-sementes.edition-familia {
+  --accent: #b8322a;
+  --accent-hover: #962620;
+  --accent-soft: #fde9e4;
+  --edition: #54b448;
+  --focus: #b8322a;
+}
+
+.theme-sementes.edition-igrejas {
+  --accent: #0b6a9e;
+  --accent-hover: #08557f;
+  --accent-soft: #e3f3fb;
+  --edition: #18a8e4;
+  --focus: #0b6a9e;
+}
+
+/* --------------------------- Componentes --------------------------- */
+
+@layer components {
+  .font-display {
+    font-family: var(--font-fraunces), Georgia, "Times New Roman", serif;
+    font-variation-settings: var(--display-settings, normal);
+    font-weight: var(--display-weight, 500);
+    letter-spacing: -0.015em;
+  }
+
+  .eyebrow {
+    @apply text-[0.8rem] font-bold uppercase tracking-[0.14em];
+    color: var(--muted);
+  }
+
+  .btn {
+    @apply inline-flex min-h-[48px] items-center justify-center gap-2 rounded-xl px-6 py-3 text-center text-[1rem] font-bold leading-snug transition-colors duration-200;
+  }
+
+  .btn-primary {
+    background-color: var(--accent);
+    color: var(--on-accent, #fff);
+  }
+  .btn-primary:hover {
+    background-color: var(--accent-hover);
+  }
+
+  .btn-secondary {
+    border: 1.5px solid currentColor;
+    color: var(--ink);
+  }
+  .btn-secondary:hover {
+    background-color: var(--accent-soft);
+  }
+
+  .link-arrow {
+    @apply inline-block font-bold underline decoration-2 underline-offset-[6px];
+    color: var(--accent);
+    text-decoration-color: color-mix(in srgb, var(--accent) 35%, transparent);
+  }
+  .link-arrow:hover {
+    text-decoration-color: var(--accent);
+  }
+
+  .prose-body > p + p {
+    margin-top: 1rem;
+  }
+
+  /* Marcação de pendência: só é renderizada no modo de revisão. */
+  .pending-note {
+    @apply my-2 block rounded-lg border-2 border-dashed px-3 py-2 text-left font-sans text-[0.85rem] font-semibold leading-snug;
+    border-color: #c2410c;
+    background: #fff7ed;
+    color: #7c2d12;
+  }
+  .pending-cta {
+    @apply inline-flex min-h-[48px] max-w-[26rem] items-center rounded-xl border-2 border-dashed px-5 py-3 text-left text-[0.95rem] font-semibold leading-snug;
+    border-color: #c2410c;
+    background: #fff7ed;
+    color: #7c2d12;
+  }
+
+  .faq-item summary {
+    list-style: none;
+    cursor: pointer;
+  }
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+  .faq-item[open] .faq-icon {
+    transform: rotate(45deg);
+  }
+}
+
+/* ----------------------- Reveal (somente NR-1) -----------------------
+   O conteúdo só é ocultado quando o script inline marcou <html> com
+   .js-reveal (JS ativo, sem preferência por movimento reduzido). Se a
+   hidratação falhar, o próprio script remove a classe após 2,5 s. */
+.js-reveal .theme-nr1 .reveal {
   opacity: 0;
   transform: translateY(24px);
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-.reveal.visible {
+.js-reveal .theme-nr1 .reveal.visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
 }
 
 .reveal-delay-1 { transition-delay: 0.1s; }
@@ -36,25 +230,12 @@ body {
 .reveal-delay-5 { transition-delay: 0.5s; }
 .reveal-delay-6 { transition-delay: 0.6s; }
 
-/* Accordion */
-.accordion-content {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.35s ease, padding 0.3s ease;
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }
-
-.accordion-content.open {
-  max-height: 400px;
-}
-
-/* Focus visible */
-*:focus-visible {
-  outline: 2px solid #2F7D7E;
-  outline-offset: 2px;
-  border-radius: 4px;
-}
-
-/* Scrollbar subtle */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #F7F5F0; }
-::-webkit-scrollbar-thumb { background: #D9CBB8; border-radius: 3px; }
