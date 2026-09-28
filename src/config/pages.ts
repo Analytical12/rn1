@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getOffer, isIndexable, type OfferId } from "./offers";
-import { isReview, SITE_NAME } from "./site";
+import { allowIndexing, isReview, SITE_NAME } from "./site";
 
 export type PageType = "home" | "service" | "product" | "product_chooser";
 
@@ -82,13 +82,13 @@ export function pageMetadata(
   { title, description, absoluteTitle = false }: { title: string; description: string; absoluteTitle?: boolean },
 ): Metadata {
   const page: PageEntry = pages[key];
-  const indexable = !isReview && isPagePublishable(page);
+  const indexable = allowIndexing && isPagePublishable(page);
   const fullTitle = absoluteTitle ? title : `${title} | ${SITE_NAME}`;
   return {
     title: { absolute: fullTitle },
     description,
     alternates: { canonical: page.path },
-    robots: indexable ? { index: true, follow: true } : { index: false, follow: !isReview },
+    robots: indexable ? { index: true, follow: true } : { index: false, follow: allowIndexing },
     openGraph: {
       type: "website",
       locale: "pt_BR",

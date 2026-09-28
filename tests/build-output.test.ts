@@ -40,6 +40,9 @@ const text = Object.fromEntries(
   ]),
 );
 const isReviewBuild = html["/"].includes("Versão de revisão");
+const robotsTxt = readFileSync(join(APP, "robots.txt.body"), "utf8");
+// Indexação depende do ambiente (só Production da Vercel), não do modo visual.
+const isIndexingBuild = /Allow: \//.test(robotsTxt);
 
 function walk(dir: string): string[] {
   return readdirSync(dir).flatMap((name) => {
@@ -133,8 +136,10 @@ test("sitemap e robots conforme o modo", () => {
   // Ofertas pendentes (checkout/contato sem confirmação) ficam fora do sitemap
   assert.ok(!sitemap.includes("/advento"));
   assert.ok(!sitemap.includes("/analise-comportamental"));
-  if (isReviewBuild) assert.match(robots, /Disallow: \//);
-  else assert.match(robots, /Allow: \//);
+  if (isIndexingBuild) assert.match(robots, /Allow: \//);
+  else assert.match(robots, /Disallow: \//);
+  // Revisão nunca é indexável
+  if (isReviewBuild) assert.equal(isIndexingBuild, false);
 });
 
 test("build de produção: sem pendências, preços provisórios ou alegações não confirmadas", { skip: isReviewBuild ? "build de revisão" : false }, () => {
@@ -170,12 +175,14 @@ test("build de produção: sem pendências, preços provisórios ou alegações 
   for (const route of ["/advento", "/advento/familia", "/advento/igrejas", "/analise-comportamental"]) {
     assert.match(html[route], /<meta name="robots" content="noindex/, route);
   }
-  for (const route of ["/", "/nr1", "/perfil-e-proposito"]) {
-    assert.match(html[route], /<meta name="robots" content="index, follow"/, route);
+  if (isIndexingBuild) {
+    for (const route of ["/", "/nr1", "/perfil-e-proposito"]) {
+      assert.match(html[route], /<meta name="robots" content="index, follow"/, route);
+    }
   }
 });
 
-test("build de revisão: nada é indexável", { skip: isReviewBuild ? false : "build de produção" }, () => {
+test("ambiente sem indexação (revisão ou preview): nenhuma página indexável", { skip: isIndexingBuild ? "build indexável" : false }, () => {
   for (const [route, h] of Object.entries(html)) assert.match(h, /<meta name="robots" content="noindex/, route);
 });
 

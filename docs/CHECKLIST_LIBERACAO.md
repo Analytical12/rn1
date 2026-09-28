@@ -68,7 +68,20 @@ Confirmar "há 12 anos" em Sobre Carla (outras páginas antigas citam 8, 20 e 23
 - Igreja, p. 15: menção ao material completo "a partir da 3ª semana". Conferir se o trecho permanece na versão final; o site não trata isso como entrega parcelada.
 - Família, p. 79: atividade cita filme "na igreja" num dia vivido em casa.
 
-## 3. Verificações técnicas antes do merge
+## 3. Variáveis por ambiente na Vercel
+
+O modo **visual** (`NEXT_PUBLIC_SITE_MODE`) e a **indexação** são independentes: só o ambiente Production da Vercel (`VERCEL_ENV=production`) pode ser indexado. Qualquer preview fica com `robots.txt` `Disallow: /` e `noindex, nofollow`, mesmo com aparência de produção.
+
+| Ambiente | `NEXT_PUBLIC_SITE_MODE` | Resultado |
+|---|---|---|
+| Preview da branch `feat/site-principal-carla` | `production` (variável de Preview restrita à branch) | Aparência de lançamento, sem pendências; não indexável |
+| Preview de outras branches | não definir | Modo revisão, pendências marcadas; não indexável |
+| Production | **`production`, definida antes do build de lançamento** | Aparência de lançamento; indexável conforme cada oferta |
+| `NEXT_PUBLIC_GTM_ID` | só depois da política de privacidade | Sem ID, nenhum script de medição |
+
+O código também assume `production` quando `VERCEL_ENV=production` e a variável não existe, mas o valor deve ficar explícito em Production. Nunca definir `review` em Production.
+
+## 4. Verificações técnicas antes do merge
 
 ```bash
 npm ci
@@ -80,11 +93,11 @@ npm test
 
 - [ ] Todos verdes (o teste "build de produção" só roda no build de produção)
 - [ ] Nenhum PDF no repositório (`git ls-files '*.pdf'` vazio)
-- [ ] Enviar a branch e abrir a **Preview** da Vercel (em preview o site fica em modo revisão, com pendências visíveis e sem indexação)
+- [ ] Enviar a branch e abrir a **Preview** da Vercel (com `NEXT_PUBLIC_SITE_MODE=production` restrita à branch, o preview mostra o site como será lançado e continua sem indexação)
 - [ ] Conferir a preview em 360, 390, 768 e 1366 px
-- [ ] Na Vercel, confirmar que a branch de produção é `main` e que não há `NEXT_PUBLIC_SITE_MODE=review` definido em Production
+- [ ] Na Vercel, confirmar que a branch de produção é `main` e definir `NEXT_PUBLIC_SITE_MODE=production` em Production
 
-## 4. Publicação
+## 5. Publicação
 
 - [ ] Merge em `main` (dispara produção)
 - [ ] Conferir: `/`, `/nr1`, `/perfil-e-proposito`, `/sitemap.xml`, `/robots.txt`
@@ -92,7 +105,7 @@ npm test
 - [ ] Um link antigo como `https://www.carlagerhard.com/#drps` leva a `/nr1#drps`
 - [ ] Enviar o sitemap no Google Search Console
 
-## 5. Depois da publicação (etapas separadas)
+## 6. Depois da publicação (etapas separadas)
 
 - [ ] Política de privacidade e termos no novo site
 - [ ] Medição: `docs/RASTREAMENTO_PARA_CLAUDE.md`

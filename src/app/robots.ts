@@ -1,9 +1,9 @@
 import type { MetadataRoute } from "next";
-import { isReview, SITE_URL } from "@/config/site";
+import { allowIndexing, SITE_URL } from "@/config/site";
 
-// Fora da produção (local, previews), nada é indexável.
+// Fora do ambiente Production (previews, revisão), nada é indexável.
 export default function robots(): MetadataRoute.Robots {
-  if (isReview) {
+  if (!allowIndexing) {
     return { rules: [{ userAgent: "*", disallow: "/" }] };
   }
   return {

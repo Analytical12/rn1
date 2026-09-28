@@ -18,6 +18,9 @@ export const SITE_MODE: SiteMode =
 
 export const isReview = SITE_MODE === "review";
 
+/** Só o ambiente Production da Vercel é indexável (ver next.config.ts). */
+export const allowIndexing = process.env.SITE_INDEXING === "on";
+
 /**
  * Integrações de medição. Nenhum ID é inventado: sem valor válido, nenhum
  * script de terceiros é carregado e o aviso de consentimento não aparece.

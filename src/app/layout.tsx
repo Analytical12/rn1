@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Manrope } from "next/font/google";
 import { AnalyticsRoot } from "@/components/site/AnalyticsRoot";
 import { ReviewBanner } from "@/components/site/Pending";
-import { isReview, SITE_NAME, SITE_URL } from "@/config/site";
+import { allowIndexing, SITE_NAME, SITE_URL } from "@/config/site";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     "Carla Gerhard é psicanalista, analista comportamental e pastora. Análise comportamental, apoio a empresas na NR-1 e materiais para famílias e ministérios.",
   applicationName: SITE_NAME,
   formatDetection: { telephone: false, email: false, address: false },
-  robots: isReview ? { index: false, follow: false } : undefined,
+  robots: allowIndexing ? undefined : { index: false, follow: false },
 };
 
 export const viewport: Viewport = {
