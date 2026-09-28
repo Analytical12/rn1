@@ -58,7 +58,7 @@ export default function AdventoPage() {
       <SeedStripe />
 
       <main id="conteudo" data-page-type="product_chooser">
-        <section>
+        <section className="editorial-hero advent-hub-hero">
           <div className="mx-auto max-w-content px-4 pb-10 pt-14 sm:px-6 lg:px-8 lg:pt-20">
             <p className="eyebrow">Pequenas Sementes · Advento de Natal 2026</p>
             <h1 className="font-display mt-5 max-w-3xl text-balance text-[2.4rem] leading-[1.08] text-ink sm:text-[3.1rem] lg:text-[3.5rem]">
@@ -75,7 +75,7 @@ export default function AdventoPage() {
         <section aria-label="Escolha a edição">
           <div className="mx-auto grid max-w-content gap-10 px-4 pb-20 sm:px-6 md:grid-cols-2 lg:gap-12 lg:px-8 lg:pb-28">
             {editions.map((e) => (
-              <article key={e.key} className={`${e.theme} flex flex-col rounded-2xl border border-line bg-white p-5 sm:p-7`}>
+              <article key={e.key} className={`${e.theme} edition-choice flex flex-col`}>
                 <Image
                   src={e.cover.src}
                   width={e.cover.width}

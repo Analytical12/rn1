@@ -83,7 +83,7 @@ export default function PerfilPropositoPage() {
 
       <main id="conteudo" data-page-type="product">
         {/* HERO */}
-        <section>
+        <section className="editorial-hero collection-hero">
           <div className="mx-auto grid max-w-content gap-12 px-4 py-14 sm:px-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:gap-16 lg:px-8 lg:py-24">
             <div>
               <p className="eyebrow">Combo Perfil e Propósito</p>
@@ -106,7 +106,7 @@ export default function PerfilPropositoPage() {
               </div>
             </div>
 
-            <aside aria-label="Temas da coleção" className="rounded-2xl bg-panel px-6 py-8 sm:px-9">
+            <aside aria-label="Temas da coleção" className="collection-index rounded-2xl bg-panel px-6 py-8 sm:px-9">
               <p className="font-display text-[4.5rem] leading-none text-accent">16</p>
               <p className="mt-1 font-bold text-ink">eBooks em quatro temas</p>
               <ul className="mt-6 divide-y divide-[#cfdcd1] border-t border-[#cfdcd1]">
@@ -192,15 +192,15 @@ export default function PerfilPropositoPage() {
               Da compra à leitura
             </h2>
             <ol className="mt-10 grid gap-10 md:grid-cols-3">
-              <li className="border-t-2 border-ink pt-5">
+              <li className="editorial-step border-t-2 border-ink pt-5">
                 <h3 className="text-[1.2rem] font-bold text-ink">1. Compra</h3>
                 <p className="mt-2 leading-relaxed">No checkout da Eduzz, com as formas de pagamento exibidas lá.</p>
               </li>
-              <li className="border-t-2 border-ink pt-5">
+              <li className="editorial-step border-t-2 border-ink pt-5">
                 <h3 className="text-[1.2rem] font-bold text-ink">2. Acesso</h3>
                 <p className="mt-2 leading-relaxed">Liberado pela plataforma depois da confirmação do pagamento.</p>
               </li>
-              <li className="border-t-2 border-ink pt-5">
+              <li className="editorial-step border-t-2 border-ink pt-5">
                 <h3 className="text-[1.2rem] font-bold text-ink">3. Leitura</h3>
                 <p className="mt-2 leading-relaxed">No seu ritmo, começando pelo tema que fizer mais sentido agora.</p>
               </li>
@@ -227,7 +227,7 @@ export default function PerfilPropositoPage() {
               height={840}
               sizes="256px"
               alt="Carla Gerhard sorrindo"
-              className="h-auto w-56 rounded-2xl md:w-full"
+              className="author-portrait h-auto w-56 rounded-2xl md:w-full"
             />
             <div>
               <p className="eyebrow">Autora</p>
@@ -245,7 +245,7 @@ export default function PerfilPropositoPage() {
         {/* OFERTA */}
         <section id="oferta" aria-labelledby="oferta-titulo" className="bg-panel">
           <div className="mx-auto max-w-content px-4 py-20 sm:px-6 lg:px-8 lg:py-24">
-            <div className="mx-auto max-w-xl text-center">
+            <div className="collection-offer mx-auto max-w-xl text-center">
               <p className="eyebrow">Oferta</p>
               <h2 id="oferta-titulo" className="font-display mt-3 text-[2.2rem] leading-tight text-ink">
                 Combo Perfil e Propósito

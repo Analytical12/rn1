@@ -17,7 +17,7 @@ const seedColors = ["var(--s-green)", "var(--s-orange)", "var(--s-blue)", "var(-
 /** Faixa com as cores do logo Pequenas Sementes (detalhe de interface). */
 export function SeedStripe({ className = "" }: { className?: string }) {
   return (
-    <div aria-hidden="true" className={`flex h-1.5 w-full ${className}`}>
+    <div aria-hidden="true" className={`seed-stripe flex h-1.5 w-full ${className}`}>
       {seedColors.map((c) => (
         <span key={c} className="flex-1" style={{ backgroundColor: c }} />
       ))}
@@ -26,7 +26,9 @@ export function SeedStripe({ className = "" }: { className?: string }) {
 }
 
 export function seedColor(i: number) {
-  return seedColors[i % seedColors.length];
+  // Tons de apoio com contraste para números e textos; o logo mantém suas cores.
+  const colors = ["#427041", "#a94e28", "#356b80", "#a03e58", "#826622"];
+  return colors[i % colors.length];
 }
 
 interface Week {
@@ -38,7 +40,7 @@ interface Week {
 
 export function WeekList({ weeks, columns }: { weeks: Week[]; columns: string }) {
   return (
-    <ol className={`grid gap-x-8 gap-y-10 ${columns}`}>
+    <ol className={`week-list grid gap-x-8 gap-y-10 ${columns}`}>
       {weeks.map((w, i) => (
         <li key={w.label} className="border-t-4 pt-4" style={{ borderColor: seedColor(i) }}>
           <p className="text-[0.85rem] font-bold uppercase tracking-[0.12em] text-muted">{w.label}</p>
@@ -55,13 +57,12 @@ export function WeekList({ weeks, columns }: { weeks: Week[]; columns: string })
 
 export function Steps({ steps }: { steps: { title: string; text: string }[] }) {
   return (
-    <ol className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+    <ol className="advent-steps grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
       {steps.map((s, i) => (
         <li key={s.title}>
           <span
             aria-hidden="true"
             className="font-display flex h-11 w-11 items-center justify-center rounded-full text-[1.2rem] text-white"
-            style={{ backgroundColor: "var(--accent)" }}
           >
             {i + 1}
           </span>
@@ -88,7 +89,7 @@ export function OfferPanel({ offerId, ctaLabel, included, notIncluded, microcopy
   const offer = getOffer(offerId);
   const price = offer.price;
   return (
-    <div className="mx-auto max-w-2xl rounded-2xl border border-line bg-white px-6 py-10 text-center sm:px-12">
+    <div className="advent-offer mx-auto max-w-2xl rounded-2xl border border-line bg-white px-6 py-10 text-center sm:px-12">
       <p className="eyebrow">Pequenas Sementes</p>
       <h2 id="oferta-titulo" className="font-display mt-3 text-balance text-[1.9rem] leading-tight text-ink sm:text-[2.2rem]">
         {offer.name}

@@ -109,7 +109,7 @@ export default function AnalisePage() {
 
       <main id="conteudo" data-page-type="service">
         {/* HERO */}
-        <section className="overflow-hidden">
+        <section className="editorial-hero analysis-hero overflow-hidden">
           <div className="mx-auto grid max-w-content gap-10 px-4 pt-12 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14 lg:px-8 lg:pt-16">
             <div className="lg:pb-24 lg:pt-10">
               <p className="eyebrow">Análise comportamental com devolutiva</p>
@@ -129,8 +129,8 @@ export default function AnalisePage() {
                 </a>
               </div>
             </div>
-            <div className="relative flex justify-center self-end">
-              <div aria-hidden="true" className="absolute inset-x-[8%] bottom-0 top-[18%] rounded-t-[2.5rem] bg-rose" />
+            <div className="portrait-stage relative flex justify-center self-end">
+              <div aria-hidden="true" className="portrait-wash absolute inset-x-[8%] bottom-0 top-[18%] rounded-t-[2.5rem] bg-rose" />
               <Image
                 src="/images/carla/carla-camisa-laranja.webp"
                 width={706}
@@ -138,7 +138,7 @@ export default function AnalisePage() {
                 priority
                 sizes="(min-width: 1024px) 290px, 210px"
                 alt="Carla Gerhard, de camisa laranja, sentada"
-                className="relative h-[430px] w-auto sm:h-[500px] lg:h-[580px]"
+                className="portrait-image relative h-[430px] w-auto sm:h-[500px] lg:h-[580px]"
               />
             </div>
           </div>
@@ -171,7 +171,7 @@ export default function AnalisePage() {
             </div>
             <ol className="mt-12 grid gap-x-14 gap-y-10 md:grid-cols-2">
               {etapas.map((etapa, i) => (
-                <li key={etapa.titulo} className="border-t-2 border-ink pt-6">
+                <li key={etapa.titulo} className="editorial-step border-t-2 border-ink pt-6">
                   <span className="font-display text-[1.1rem] text-accent">{String(i + 1).padStart(2, "0")}</span>
                   <h3 className="mt-2 text-[1.3rem] font-bold text-ink">{etapa.titulo}</h3>
                   <p className="mt-2 max-w-reading text-[1.05rem] leading-relaxed">{etapa.texto}</p>

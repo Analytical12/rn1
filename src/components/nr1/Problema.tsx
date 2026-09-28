@@ -84,7 +84,7 @@ export default function Problema() {
           {problemas.map((item, i) => (
             <div
               key={item.title}
-              className={`reveal reveal-delay-${Math.min(i + 1, 6)} group bg-[#F7F5F0] border border-[#ECE8E1] rounded-2xl p-6 hover:bg-white hover:shadow-md hover:border-[#DDEBE3] transition-all duration-300 cursor-default`}
+              className={`reveal reveal-delay-${Math.min(i + 1, 6)} nr1-editorial-item group p-6 transition-all duration-300 cursor-default`}
             >
               <div className="w-9 h-9 rounded-xl bg-[#DDEBE3] text-[#315C4B] flex items-center justify-center mb-4 group-hover:bg-[#315C4B] group-hover:text-white transition-all duration-300">
                 {item.icon}

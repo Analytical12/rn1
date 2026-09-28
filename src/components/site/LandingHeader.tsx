@@ -15,7 +15,7 @@ export function LandingHeader({ brand, cta }: Props) {
     <header className="border-b border-line bg-paper">
       <div className="mx-auto flex max-w-content items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
         {brand === "carla" ? (
-          <Link href="/" className="font-display text-[1.35rem] leading-none text-ink" aria-label="Carla Gerhard — página inicial">
+          <Link href="/" className="font-display whitespace-nowrap text-[1.35rem] leading-none text-ink" aria-label="Carla Gerhard — página inicial">
             Carla Gerhard
           </Link>
         ) : (
@@ -31,7 +31,7 @@ export function LandingHeader({ brand, cta }: Props) {
         {cta && (
           <a
             href={cta.href}
-            className="btn btn-primary min-h-[44px] px-4 py-2 text-[0.95rem]"
+            className="btn btn-primary min-h-[44px] whitespace-nowrap px-4 py-2 text-[0.95rem] max-[359px]:hidden"
             data-event="cta_click"
             data-cta-position="header"
             data-destination-type="section"

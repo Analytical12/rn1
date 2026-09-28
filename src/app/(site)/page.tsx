@@ -94,7 +94,7 @@ export default function HomePage() {
 
       <main id="conteudo" data-page-type="home">
         {/* HERO */}
-        <section className="overflow-hidden">
+        <section className="editorial-hero home-hero overflow-hidden">
           <div className="mx-auto grid max-w-content gap-8 px-4 pt-12 sm:px-6 lg:grid-cols-[1.08fr_0.92fr] lg:gap-14 lg:px-8 lg:pt-16">
             <div className="lg:pb-24 lg:pt-12">
               <h1>
@@ -118,8 +118,8 @@ export default function HomePage() {
               <p className="mt-8 text-[0.95rem] text-muted">Psicanalista · Analista comportamental · Pastora</p>
             </div>
 
-            <div className="relative flex justify-center self-end">
-              <div aria-hidden="true" className="absolute inset-x-[6%] bottom-0 top-[14%] rounded-t-full bg-panel" />
+            <div className="portrait-stage relative flex justify-center self-end">
+              <div aria-hidden="true" className="portrait-wash absolute inset-x-[6%] bottom-0 top-[14%] rounded-t-full bg-panel" />
               <Image
                 src="/images/carla/carla-blazer-branco.webp"
                 width={866}
@@ -127,7 +127,7 @@ export default function HomePage() {
                 priority
                 sizes="(min-width: 1024px) 350px, 260px"
                 alt="Carla Gerhard, de blazer branco, com a mão apoiada no queixo"
-                className="relative h-[440px] w-auto sm:h-[520px] lg:h-[600px]"
+                className="portrait-image relative h-[440px] w-auto sm:h-[520px] lg:h-[600px]"
               />
             </div>
           </div>
@@ -191,7 +191,7 @@ export default function HomePage() {
               height={840}
               sizes="(min-width: 1024px) 460px, 92vw"
               alt="Carla Gerhard sorrindo, de camisa branca"
-              className="h-auto w-full rounded-2xl"
+              className="author-portrait h-auto w-full rounded-2xl"
             />
             <div>
               <p className="eyebrow">Sobre</p>
@@ -242,7 +242,7 @@ export default function HomePage() {
               </div>
 
               {listed.perfil && (
-                <article className="mt-12 grid gap-6 rounded-2xl bg-panel px-6 py-10 sm:px-10 lg:grid-cols-[auto_1fr] lg:items-center lg:gap-16 lg:px-14">
+                <article className="collection-intro mt-12 grid gap-6 rounded-2xl bg-panel px-6 py-10 sm:px-10 lg:grid-cols-[auto_1fr] lg:items-center lg:gap-16 lg:px-14">
                   <p aria-hidden="true" className="font-display text-[6.5rem] leading-[0.85] text-accent sm:text-[8.5rem]">
                     16
                   </p>

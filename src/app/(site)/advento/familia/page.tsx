@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { AdventoArtwork } from "@/components/advento/AdventoArtwork";
 import Link from "next/link";
 import { AboutSementes, OfferPanel, SeedStripe, Steps, WeekList, offerCtaLabel, seedColor } from "@/components/advento/Blocks";
 import { Faq, type FaqEntry } from "@/components/site/Faq";
@@ -82,7 +82,7 @@ export default function AdventoFamiliaPage() {
 
       <main id="conteudo" data-page-type="product">
         {/* HERO */}
-        <section>
+        <section className="editorial-hero advent-edition-hero">
           <div className="mx-auto grid max-w-content items-center gap-12 px-4 py-14 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14 lg:px-8 lg:py-20">
             <div>
               <p className="eyebrow" style={{ color: "var(--accent)" }}>
@@ -102,18 +102,7 @@ export default function AdventoFamiliaPage() {
                 <p className="mt-3 text-[0.95rem] text-muted">Material digital em PDF. Para imprimir e utilizar em casa.</p>
               </div>
             </div>
-            <div className="relative">
-              <div aria-hidden="true" className="absolute -bottom-3 -right-3 left-3 top-3 rounded-2xl" style={{ backgroundColor: "var(--s-green)" }} />
-              <Image
-                src={familia.cover.src}
-                width={familia.cover.width}
-                height={familia.cover.height}
-                alt={familia.cover.alt}
-                priority
-                sizes="(min-width: 1024px) 560px, 92vw"
-                className="relative h-auto w-full rounded-2xl border-4 border-white"
-              />
-            </div>
+            <AdventoArtwork cover={familia.cover} samples={familia.samples} />
           </div>
         </section>
 

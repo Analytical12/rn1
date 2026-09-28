@@ -81,7 +81,7 @@ export default function Programas() {
           {programas.map((p, i) => (
             <div
               key={p.title}
-              className={`reveal reveal-delay-${Math.min((i % 3) + 1, 6)} group bg-white border border-[#ECE8E1] rounded-2xl p-5 hover:shadow-md transition-all duration-300`}
+              className={`reveal reveal-delay-${Math.min((i % 3) + 1, 6)} nr1-editorial-item group p-5 transition-all duration-300`}
             >
               <div
                 className="w-1 h-8 rounded-full mb-4 transition-all duration-300 group-hover:h-10"

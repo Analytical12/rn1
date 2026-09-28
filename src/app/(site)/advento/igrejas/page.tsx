@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { AdventoArtwork } from "@/components/advento/AdventoArtwork";
 import Link from "next/link";
 import { AboutSementes, OfferPanel, SeedStripe, Steps, WeekList, offerCtaLabel, seedColor } from "@/components/advento/Blocks";
 import { Faq, type FaqEntry } from "@/components/site/Faq";
@@ -83,7 +83,7 @@ export default function AdventoIgrejasPage() {
 
       <main id="conteudo" data-page-type="product">
         {/* HERO */}
-        <section>
+        <section className="editorial-hero advent-edition-hero">
           <div className="mx-auto grid max-w-content items-center gap-12 px-4 py-14 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14 lg:px-8 lg:py-20">
             <div>
               <p className="eyebrow" style={{ color: "var(--accent)" }}>
@@ -103,18 +103,7 @@ export default function AdventoIgrejasPage() {
                 <p className="mt-3 text-[0.95rem] text-muted">Material digital em PDF para aplicação no ministério infantil.</p>
               </div>
             </div>
-            <div className="relative">
-              <div aria-hidden="true" className="absolute -bottom-3 -right-3 left-3 top-3 rounded-2xl" style={{ backgroundColor: "var(--s-blue)" }} />
-              <Image
-                src={igrejas.cover.src}
-                width={igrejas.cover.width}
-                height={igrejas.cover.height}
-                alt={igrejas.cover.alt}
-                priority
-                sizes="(min-width: 1024px) 560px, 92vw"
-                className="relative h-auto w-full rounded-2xl border-4 border-white"
-              />
-            </div>
+            <AdventoArtwork cover={igrejas.cover} samples={igrejas.samples} />
           </div>
         </section>
 

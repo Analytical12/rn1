@@ -14,7 +14,7 @@ export default function NotFound() {
   return (
     <div className={`${fraunces.variable} theme-carla bg-paper`}>
       <SiteHeader links={mainNavLinks()} />
-      <main id="conteudo" data-page-type="not_found" className="mx-auto max-w-content px-4 py-24 sm:px-6 lg:px-8 lg:py-32">
+      <main id="conteudo" data-page-type="not_found" className="not-found-editorial mx-auto max-w-content px-4 py-24 sm:px-6 lg:px-8 lg:py-32">
         <p className="eyebrow">Erro 404</p>
         <h1 className="font-display mt-4 max-w-2xl text-balance text-[2.4rem] leading-[1.1] text-ink sm:text-[3rem]">
           Esta página não foi encontrada.

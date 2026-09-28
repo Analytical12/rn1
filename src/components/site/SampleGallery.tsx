@@ -33,14 +33,14 @@ export function SampleGallery({ samples, productId }: { samples: Sample[]; produ
 
   return (
     <>
-      <ul className="grid gap-x-8 gap-y-12 md:grid-cols-3">
+      <ul className="sample-gallery grid gap-x-8 gap-y-12 md:grid-cols-3">
         {samples.map((sample) => (
           <li key={sample.src}>
             <figure>
               <button
                 type="button"
                 onClick={() => open(sample)}
-                className="group block w-full overflow-hidden rounded-lg border border-line bg-white text-left"
+                className="sample-page group block w-full overflow-hidden rounded-lg border border-line bg-white text-left"
                 aria-label={`Ampliar página: ${sample.title}`}
               >
                 <Image
@@ -51,6 +51,7 @@ export function SampleGallery({ samples, productId }: { samples: Sample[]; produ
                   sizes="(min-width: 1160px) 360px, (min-width: 768px) 30vw, 92vw"
                   className="h-auto w-full transition-transform duration-300 group-hover:scale-[1.02]"
                 />
+                <span className="sample-zoom" aria-hidden="true">Ver página <span>↗</span></span>
               </button>
               <figcaption className="mt-4">
                 <span className="block text-[1.05rem] font-bold text-ink">{sample.title}</span>

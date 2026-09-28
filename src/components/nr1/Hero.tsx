@@ -13,9 +13,9 @@ export default function Hero() {
   return (
     <section
       id="inicio"
-      className="relative pt-[120px] pb-20 lg:pt-[148px] lg:pb-28 overflow-hidden"
+      className="nr1-hero relative pt-[120px] pb-20 lg:pt-[148px] lg:pb-28 overflow-hidden"
       style={{
-        background: "linear-gradient(145deg, #F7F5F0 0%, #DDEBE3 50%, #DDEAF0 100%)",
+        background: "radial-gradient(ellipse at 85% 40%, #DDEBE3 0%, transparent 60%), linear-gradient(145deg, #F7F5F0, #F0F3ED)",
       }}
     >
       {/* Subtle background texture */}
@@ -95,7 +95,7 @@ export default function Hero() {
 
           {/* Right — Dashboard mockup */}
           <div className="relative">
-            <div className="relative bg-white rounded-2xl shadow-xl border border-[#ECE8E1] overflow-hidden">
+            <div className="nr1-report relative bg-white rounded-2xl shadow-xl border border-[#ECE8E1] overflow-hidden">
               {/* Card header */}
               <div className="px-5 pt-5 pb-4 border-b border-[#F0EDE7]">
                 <div className="flex items-center justify-between mb-1">
@@ -142,7 +142,7 @@ export default function Hero() {
             </div>
 
             {/* Floating badges */}
-            <div className="absolute -top-4 -right-4 flex flex-wrap gap-2 justify-end max-w-[220px]">
+            <div className="nr1-badges mt-5 flex flex-wrap gap-2">
               {badges.map((b, i) => (
                 <span
                   key={b}

@@ -115,7 +115,7 @@ export default function Relatorios() {
           {relatorios.map((item, i) => (
             <div
               key={item.title}
-              className={`reveal reveal-delay-${Math.min((i % 3) + 1, 6)} group relative bg-[#F7F5F0] border border-[#ECE8E1] rounded-2xl p-6 hover:bg-white hover:shadow-md hover:border-[#8FAF9B] transition-all duration-300`}
+              className={`reveal reveal-delay-${Math.min((i % 3) + 1, 6)} nr1-editorial-item group relative p-6 transition-all duration-300`}
             >
               <div className="flex items-start justify-between mb-4">
                 <div className="w-9 h-9 rounded-xl bg-[#DDEBE3] text-[#315C4B] flex items-center justify-center group-hover:bg-[#315C4B] group-hover:text-white transition-all duration-300">
