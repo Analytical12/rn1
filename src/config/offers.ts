@@ -169,8 +169,9 @@ export const offers: Record<OfferId, Offer> = {
       "URL do checkout da edição Igrejas.",
       "Confirmação final do preço (R$ 49,90 é provisório).",
       "Termos de licença por igreja/congregação/filial (o PDF, p. 2, não define).",
-      "Forma de entrega: o manual (p. 15) diz que o material completo é disponibilizado a partir da 3ª semana.",
-      "Corrigir no PDF o período da semana 3 (\"29/11/26 a 15/11/26\", pp. 66, 67, 70 e 75).",
+      "Forma de entrega do PDF e canal de suporte da plataforma de pagamento.",
+      "Editorial (PDF): período da semana 3 (\"29/11/26 a 15/11/26\", pp. 66, 67, 70 e 75).",
+      "Editorial (PDF): p. 15 cita o material completo \"a partir da 3ª semana\"; conferir se o trecho fica na versão final. Não é tratado como entrega parcelada.",
     ],
   },
   devocional_365_dias: {

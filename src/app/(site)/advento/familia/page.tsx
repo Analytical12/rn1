@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { AboutSementes, OfferPanel, SeedStripe, Steps, WeekList, seedColor } from "@/components/advento/Blocks";
+import { AboutSementes, OfferPanel, SeedStripe, Steps, WeekList, offerCtaLabel, seedColor } from "@/components/advento/Blocks";
 import { Faq, type FaqEntry } from "@/components/site/Faq";
 import { LandingHeader } from "@/components/site/LandingHeader";
 import { SampleGallery } from "@/components/site/SampleGallery";
@@ -77,7 +77,7 @@ export default function AdventoFamiliaPage() {
   return (
     <div className="theme-sementes edition-familia bg-paper">
       <TrackView productId={offer.id} pageType="product" />
-      <LandingHeader brand="sementes" cta={{ href: "#oferta", label: "Ver oferta" }} />
+      <LandingHeader brand="sementes" cta={{ href: "#oferta", label: offerCtaLabel(offer.id, "Ver oferta", "Ver detalhes") }} />
       <SeedStripe />
 
       <main id="conteudo" data-page-type="product">
@@ -97,7 +97,7 @@ export default function AdventoFamiliaPage() {
               </p>
               <div className="mt-8">
                 <a href="#oferta" className="btn btn-primary w-full sm:w-auto" data-event="cta_click" data-product-id={offer.id} data-cta-position="hero" data-destination-type="section">
-                  Quero viver esse Advento em família
+                  {offerCtaLabel(offer.id, "Quero viver esse Advento em família")}
                 </a>
                 <p className="mt-3 text-[0.95rem] text-muted">Material digital em PDF. Para imprimir e utilizar em casa.</p>
               </div>
@@ -259,7 +259,7 @@ export default function AdventoFamiliaPage() {
               Uma atividade por vez. Uma conversa por vez. Um Natal vivido com mais intenção.
             </h2>
             <a href="#oferta" className="btn btn-primary mt-8 w-full sm:w-auto" data-event="cta_click" data-product-id={offer.id} data-cta-position="fechamento" data-destination-type="section">
-              Quero viver esse Advento em família
+              {offerCtaLabel(offer.id, "Quero viver esse Advento em família")}
             </a>
           </div>
         </section>

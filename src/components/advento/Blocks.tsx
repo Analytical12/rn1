@@ -1,8 +1,16 @@
 import { CheckoutCTA } from "@/components/site/Cta";
 import { PendingNote } from "@/components/site/Pending";
 import { contacts, instagramHref } from "@/config/contacts";
-import { formatPrice, getOffer, priceStatusLabel, shouldShowPrice, type OfferId } from "@/config/offers";
+import { formatPrice, getOffer, isSellable, priceStatusLabel, shouldShowPrice, type OfferId } from "@/config/offers";
 import { isReview } from "@/config/site";
+
+/**
+ * Enquanto a edição não está à venda, a publicação não usa texto de compra
+ * em botões que levam à seção da oferta. Na revisão, mostra o texto final.
+ */
+export function offerCtaLabel(offerId: OfferId, label: string, fallback = "Ver detalhes da edição") {
+  return isReview || isSellable(getOffer(offerId)) ? label : fallback;
+}
 
 const seedColors = ["var(--s-green)", "var(--s-orange)", "var(--s-blue)", "var(--s-pink)", "var(--s-yellow)"];
 

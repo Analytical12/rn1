@@ -160,6 +160,12 @@ test("build de produção: sem pendências, preços provisórios ou alegações 
   }
   // Depoimentos sem autorização não aparecem
   assert.ok(!text["/analise-comportamental"].includes("Luh Ferrazza"));
+  // Advento sem checkout: nenhum texto de compra; a escolha mostra as duas edições com o status
+  for (const cta of ["Quero viver esse Advento em família", "Quero levar o Advento para meu ministério"]) {
+    for (const route of ["/advento/familia", "/advento/igrejas"]) assert.ok(!text[route].includes(cta), `${route}: "${cta}"`);
+  }
+  assert.ok(html["/advento"].includes('href="/advento/familia"') && html["/advento"].includes('href="/advento/igrejas"'));
+  assert.equal((text["/advento"].match(/Vendas desta edição ainda não abertas/g) || []).length, 2);
   // Ofertas não liberadas: noindex
   for (const route of ["/advento", "/advento/familia", "/advento/igrejas", "/analise-comportamental"]) {
     assert.match(html[route], /<meta name="robots" content="noindex/, route);
@@ -171,4 +177,14 @@ test("build de produção: sem pendências, preços provisórios ou alegações 
 
 test("build de revisão: nada é indexável", { skip: isReviewBuild ? false : "build de produção" }, () => {
   for (const [route, h] of Object.entries(html)) assert.match(h, /<meta name="robots" content="noindex/, route);
+});
+
+test("domínio sem www redireciona para o host principal preservando o caminho", () => {
+  const manifest = JSON.parse(readFileSync(join(ROOT, ".next/routes-manifest.json"), "utf8"));
+  const rule = manifest.redirects.find((r: { has?: { type: string; value: string }[] }) =>
+    r.has?.some((h) => h.type === "host" && h.value === "carlagerhard.com"),
+  );
+  assert.ok(rule, "regra de host ausente");
+  assert.equal(rule.destination, "https://www.carlagerhard.com/:path*");
+  assert.equal(rule.statusCode, 308);
 });

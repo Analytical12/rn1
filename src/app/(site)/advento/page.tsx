@@ -4,7 +4,9 @@ import { AboutSementes, SeedStripe } from "@/components/advento/Blocks";
 import { LandingHeader } from "@/components/site/LandingHeader";
 import { PendingNote } from "@/components/site/Pending";
 import { SiteFooter } from "@/components/site/SiteFooter";
-import { isPageListed, pageMetadata, pages } from "@/config/pages";
+import { getOffer, isSellable } from "@/config/offers";
+import { pageMetadata, pages } from "@/config/pages";
+import { isReview } from "@/config/site";
 import { familia, igrejas } from "@/content/advento";
 
 export const metadata = pageMetadata("advento", {
@@ -16,11 +18,11 @@ export const metadata = pageMetadata("advento", {
 
 export default function AdventoPage() {
   const editions = [
-    isPageListed("adventoFamilia") && {
+    {
       key: "familia",
       theme: "edition-familia",
       path: pages.adventoFamilia.path,
-      productId: "advento_familia",
+      productId: "advento_familia" as const,
       label: "Família",
       title: "Advento de Natal 2026 — Família",
       text: "Uma caminhada de 1º a 25 de dezembro, com atividades, cartinhas, figurinhas e orientações para pais e responsáveis.",
@@ -32,11 +34,11 @@ export default function AdventoPage() {
       cover: familia.cover,
       cta: "Conhecer o Advento Família",
     },
-    isPageListed("adventoIgrejas") && {
+    {
       key: "igrejas",
       theme: "edition-igrejas",
       path: pages.adventoIgrejas.path,
-      productId: "advento_igrejas",
+      productId: "advento_igrejas" as const,
       label: "Igrejas / Ministério Infantil",
       title: "Advento de Natal 2026 — Igrejas",
       text: "Uma programação organizada por semanas, com orientações para professores e atividades que continuam com as famílias.",
@@ -48,7 +50,7 @@ export default function AdventoPage() {
       cover: igrejas.cover,
       cta: "Conhecer o Advento Igrejas",
     },
-  ].filter((e): e is Exclude<typeof e, false> => Boolean(e));
+  ] as const;
 
   return (
     <div className="theme-sementes bg-paper">
@@ -97,6 +99,9 @@ export default function AdventoPage() {
                   ))}
                 </dl>
                 <div className="mt-auto pt-7">
+                  {!isReview && !isSellable(getOffer(e.productId)) && (
+                    <p className="mb-3 text-[0.95rem] font-semibold text-ink">Vendas desta edição ainda não abertas.</p>
+                  )}
                   <Link
                     href={e.path}
                     className="btn btn-primary w-full"

@@ -1,11 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
-import { AboutSementes, OfferPanel, SeedStripe, Steps, WeekList, seedColor } from "@/components/advento/Blocks";
+import { AboutSementes, OfferPanel, SeedStripe, Steps, WeekList, offerCtaLabel, seedColor } from "@/components/advento/Blocks";
 import { Faq, type FaqEntry } from "@/components/site/Faq";
 import { LandingHeader } from "@/components/site/LandingHeader";
 import { SampleGallery } from "@/components/site/SampleGallery";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { TrackView } from "@/components/site/TrackView";
+import { contacts } from "@/config/contacts";
 import { getOffer } from "@/config/offers";
 import { isPageListed, pageMetadata, pages } from "@/config/pages";
 import { igrejas } from "@/content/advento";
@@ -68,17 +69,16 @@ export default function AdventoIgrejasPage() {
       pending: "definir os termos de licença por igreja, congregação e filial antes do lançamento (o PDF, p. 2, não especifica).",
     },
     {
-      q: "Quando recebo o material completo?",
-      a: "O acesso é liberado após a confirmação do pagamento.",
-      pending:
-        "o manual (p. 15) informa que o material completo é disponibilizado a partir da 3ª semana. Confirmar a forma e o calendário de entrega antes de publicar esta resposta.",
+      q: "Como recebo o acesso e a quem peço ajuda?",
+      a: `O acesso é liberado após a confirmação do pagamento. Para dúvidas sobre o material, o próprio PDF indica o direct do Instagram @${contacts.sementesInstagram.handle} ou @${contacts.carlaInstagram.handle}.`,
+      pending: "confirmar plataforma de pagamento, forma de entrega do PDF e canal de suporte da compra.",
     },
   ];
 
   return (
     <div className="theme-sementes edition-igrejas bg-paper">
       <TrackView productId={offer.id} pageType="product" />
-      <LandingHeader brand="sementes" cta={{ href: "#oferta", label: "Ver oferta" }} />
+      <LandingHeader brand="sementes" cta={{ href: "#oferta", label: offerCtaLabel(offer.id, "Ver oferta", "Ver detalhes") }} />
       <SeedStripe />
 
       <main id="conteudo" data-page-type="product">
@@ -98,7 +98,7 @@ export default function AdventoIgrejasPage() {
               </p>
               <div className="mt-8">
                 <a href="#oferta" className="btn btn-primary w-full sm:w-auto" data-event="cta_click" data-product-id={offer.id} data-cta-position="hero" data-destination-type="section">
-                  Quero levar o Advento para meu ministério
+                  {offerCtaLabel(offer.id, "Quero levar o Advento para meu ministério")}
                 </a>
                 <p className="mt-3 text-[0.95rem] text-muted">Material digital em PDF para aplicação no ministério infantil.</p>
               </div>
@@ -268,7 +268,7 @@ export default function AdventoIgrejasPage() {
               Prepare uma caminhada que começa no ministério e encontra espaço dentro de casa.
             </h2>
             <a href="#oferta" className="btn btn-primary mt-8 w-full sm:w-auto" data-event="cta_click" data-product-id={offer.id} data-cta-position="fechamento" data-destination-type="section">
-              Quero levar o Advento para meu ministério
+              {offerCtaLabel(offer.id, "Quero levar o Advento para meu ministério")}
             </a>
           </div>
         </section>

@@ -25,7 +25,7 @@ Uso real do projeto, verificado no código e no build: sem `middleware`/`proxy`;
 | GHSA-6gpp-xcg3-4w24 | CVE-2026-64642 | alta | Bypass de middleware/proxy com Turbopack e `i18n.locales` com um único locale | Não: sem middleware/proxy e sem `i18n` | 16.2.11 |
 | GHSA-m99w-x7hq-7vfj | CVE-2026-64641 | alta | DoS com pelo menos uma Server Action | Não: nenhuma Server Action | 16.2.11 |
 | GHSA-89xv-2m56-2m9x | CVE-2026-64649 | alta | SSRF quando Server Action redireciona/encaminha em servidor customizado | Não: sem Server Actions e sem servidor customizado | 16.2.11 |
-| GHSA-p9j2-gv94-2wf4 | CVE-2026-64645 | alta | SSRF em `rewrites()`/`redirects()` cujo host de destino vem da requisição | Não: destinos fixos (`/advento/…`) | 16.2.11 |
+| GHSA-p9j2-gv94-2wf4 | CVE-2026-64645 | alta | SSRF em `rewrites()`/`redirects()` cujo host de destino vem da requisição | Não: destinos fixos (`/advento/…` e o host `https://www.carlagerhard.com`); nenhum host vem da requisição | 16.2.11 |
 | GHSA-68g3-v927-f742 | CVE-2026-64648 | média | `fetch` no servidor com corpo retornando resposta em cache de outra requisição | Não: nenhum `fetch` no servidor | 16.2.11 |
 | GHSA-4633-3j49-mh5q | CVE-2026-64647 | média | Idem, com corpo em charset diferente de UTF-8 | Não | 16.2.11 |
 | GHSA-4c39-4ccg-62r3 | CVE-2026-64646 | média | Payload ilimitado de Server Action no runtime edge | Não | 16.2.11 |

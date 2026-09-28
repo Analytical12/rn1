@@ -19,7 +19,6 @@ export const metadata = pageMetadata("home", {
 });
 
 type Frente = {
-  n: string;
   audience: string;
   title: string;
   text: string;
@@ -44,7 +43,6 @@ export default function HomePage() {
   const frentes: Frente[] = [];
   if (listed.nr1) {
     frentes.push({
-      n: "01",
       audience: "Para empresas",
       title: "NR-1 e riscos psicossociais",
       text:
@@ -55,7 +53,6 @@ export default function HomePage() {
   }
   if (listed.analise) {
     frentes.push({
-      n: "02",
       audience: "Para pessoas, casais e equipes",
       title: "Análise comportamental e devolutiva",
       text:
@@ -69,11 +66,11 @@ export default function HomePage() {
   if (listed.advento) materiaisLinks.push({ href: pages.advento.path, label: "Advento de Natal 2026", productId: "advento" });
   if (materiaisLinks.length > 0) {
     frentes.push({
-      n: "03",
       audience: "Para aprender e viver em família",
       title: "Materiais digitais e projetos cristãos",
-      text:
-        "eBooks sobre comportamento, propósito e relações, e os materiais do Pequenas Sementes para viver o Advento em casa e no ministério infantil.",
+      text: listed.advento
+        ? "eBooks sobre comportamento, propósito e relações, e os materiais do Pequenas Sementes para viver o Advento em casa e no ministério infantil."
+        : "eBooks sobre comportamento, propósito, família e liderança, com linguagem cristã e propostas para o dia a dia.",
       color: "#9b3d4a",
       links: materiaisLinks,
     });
@@ -150,10 +147,10 @@ export default function HomePage() {
             </div>
 
             <ol className="border-t border-line">
-              {frentes.map((frente) => (
-                <li key={frente.n} className="grid gap-4 border-b border-line py-10 sm:grid-cols-[4.5rem_1fr] sm:gap-6">
+              {frentes.map((frente, i) => (
+                <li key={frente.title} className="grid gap-4 border-b border-line py-10 sm:grid-cols-[4.5rem_1fr] sm:gap-6">
                   <span aria-hidden="true" className="font-display text-[2.4rem] leading-none" style={{ color: frente.color }}>
-                    {frente.n}
+                    {String(i + 1).padStart(2, "0")}
                   </span>
                   <div>
                     <p className="text-[0.85rem] font-bold uppercase tracking-[0.12em]" style={{ color: frente.color }}>

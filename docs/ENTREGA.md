@@ -108,13 +108,13 @@ Comandos executados no estado final:
 | `npm run lint` (ESLint 9, flat config) | 0 erros, 0 avisos |
 | `npm run typecheck` | 0 erros |
 | `npm run build` (revisão) | 11 rotas estáticas geradas |
-| `NEXT_PUBLIC_SITE_MODE=production npm run build` + `npm test` | 17 testes aprovados, 1 ignorado (exclusivo do modo revisão) |
-| `npm run build` (revisão) + `npm test` | 17 aprovados, 1 ignorado (exclusivo do modo produção) |
+| `NEXT_PUBLIC_SITE_MODE=production npm run build` + `npm test` | 18 aprovados, 1 ignorado (exclusivo do modo revisão), 0 falhas |
+| `npm run build` (revisão) + `npm test` | 18 aprovados, 1 ignorado (exclusivo do modo produção), 0 falhas |
 | Rotas, 308, 404, `/365dias` e `/crises` | 200 / 308 / 404 / 404 conferidos com `curl` |
 
 O teste de build verifica, entre outros: ausência de PDFs em `public/` e `.next/`; um `h1`, canonical e OG existente por página; IDs únicos; nenhuma imagem referenciada ausente; checkout do combo só na página do combo; calendários distintos dos Adventos; os 16 títulos; conteúdo e contatos da NR-1; sitemap só com páginas publicáveis; e, no build de produção, nenhuma pendência, preço provisório, "garantia", "497", depoimento não autorizado ou tempo de atuação antigo.
 
-Revisão visual com Chrome (Playwright), capturas de página inteira em **360, 390, 768 e 1366 px** para as 7 páginas e a 404: sem rolagem horizontal, sem IDs repetidos, sem imagens quebradas, sem erros de console. Problemas encontrados e corrigidos na revisão: rolagem horizontal na NR-1 em 360/390 px; selo "ilustrativo" escondido atrás dos badges; menu da NR-1 quebrando em 1366 px; título da Família em 5 linhas; sublinhado dos links "→"; favicon ausente.
+Revisão final (após Next 16.3.3): capturas de primeira dobra e página inteira das 7 rotas em **1366 e 390 px**, nos modos produção e revisão, em `qa-capturas/` (local, fora do git; abrir `qa-capturas/index.html`). Correções dessa revisão: `/advento` vazia em produção; CTAs de compra do Advento com vendas fechadas; numeração das frentes da home; texto da frente de materiais citando o Advento não liberado. Revisão anterior para as 7 páginas e a 404: sem rolagem horizontal, sem IDs repetidos, sem imagens quebradas, sem erros de console. Problemas encontrados e corrigidos na revisão: rolagem horizontal na NR-1 em 360/390 px; selo "ilustrativo" escondido atrás dos badges; menu da NR-1 quebrando em 1366 px; título da Família em 5 linhas; sublinhado dos links "→"; favicon ausente.
 
 Testes de interação: menus mobile por teclado (Enter abre, Esc fecha e devolve o foco, links ocultos não recebem foco); galeria abre em `<dialog>` e fecha com Esc; eventos de medição e consentimento (detalhes em `RASTREAMENTO_PARA_CLAUDE.md`).
 
@@ -133,22 +133,23 @@ Em `3be4e6a`, antes de qualquer alteração: `next build` OK (rotas `/` e `/_not
 
 ## Pendências
 
-Lista acionável em [`CHECKLIST_LIBERACAO.md`](./CHECKLIST_LIBERACAO.md). Resumo:
+Campos exatos (arquivo, campo, valor esperado e o que libera cada oferta) em [`CHECKLIST_LIBERACAO.md`](./CHECKLIST_LIBERACAO.md). Resumo:
 
+Comerciais (bloqueiam só a própria oferta):
 1. Checkout da edição Família.
 2. Checkout da edição Igrejas.
 3. Confirmação dos preços dos Adventos (R$ 59,90 e R$ 49,90 são valores de trabalho).
 4. Canal de contato da análise comportamental (três números diferentes no site antigo).
 5. Termos de licença do Advento Igrejas por igreja/congregação/filial.
-6. Forma de entrega do Advento Igrejas (manual cita material completo a partir da 3ª semana).
-7. Correção no PDF Igreja: período da semana 3; revisão no PDF Família, p. 79 ("na igreja" num dia em casa).
-8. Confirmar qual checkout do combo vale (`pvcyogot` × `G9618Q4YW1` do `/365dias/` antigo) e o preço no checkout.
-9. Decidir extras do combo (live mensal, testes, exercícios, garantia de 7 dias).
-10. Canal de suporte para compradores (combo e Adventos).
-11. Autorização dos depoimentos da análise.
-12. NR-1: confirmar "há 12 anos"; revisar descrições das etapas 06–08.
-13. Política de privacidade e termos no novo site (antes da medição).
-14. Logo vetorial Pequenas Sementes.
-15. Domínio sem www fora do ar (estacionado na Hostinger).
+6. Forma de entrega e suporte da compra dos Adventos (dependem da plataforma de pagamento).
 
-Rastreamento: [`RASTREAMENTO_PARA_CLAUDE.md`](./RASTREAMENTO_PARA_CLAUDE.md) · Artes: [`ARTES_PENDENTES.md`](./ARTES_PENDENTES.md) · Migração: [`MIGRACAO_COM_BR.md`](./MIGRACAO_COM_BR.md) · Rollback: final de [`CHECKLIST_LIBERACAO.md`](./CHECKLIST_LIBERACAO.md).
+Não bloqueiam:
+7. Combo: confirmar checkout vigente (`pvcyogot` × `G9618Q4YW1`), preço no checkout, extras antigos e canal de suporte.
+8. Autorização dos depoimentos da análise.
+9. NR-1: confirmar "há 12 anos"; revisar descrições das etapas 06–08.
+10. Editoriais nos PDFs: semana 3 da Igreja; trecho da p. 15 da Igreja sobre a 3ª semana; p. 79 da Família.
+11. Política de privacidade e termos no novo site (necessários antes da medição).
+12. Domínio sem www: registro do apex na Hostinger com o valor indicado pela Vercel ([`DOMINIO.md`](./DOMINIO.md)).
+13. Artes: nenhuma essencial; melhorias opcionais em [`ARTES_PENDENTES.md`](./ARTES_PENDENTES.md).
+
+Rastreamento: [`RASTREAMENTO_PARA_CLAUDE.md`](./RASTREAMENTO_PARA_CLAUDE.md) · Segurança: [`SEGURANCA.md`](./SEGURANCA.md) · Domínio: [`DOMINIO.md`](./DOMINIO.md) · Artes: [`ARTES_PENDENTES.md`](./ARTES_PENDENTES.md) · Migração: [`MIGRACAO_COM_BR.md`](./MIGRACAO_COM_BR.md) · Rollback: final de [`CHECKLIST_LIBERACAO.md`](./CHECKLIST_LIBERACAO.md).

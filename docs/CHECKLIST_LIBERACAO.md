@@ -2,40 +2,73 @@
 
 Branch: `feat/site-principal-carla` (local). Produção da Vercel publica a partir de `main`. A conta usada nesta entrega tem só leitura no GitHub: o envio da branch precisa ser feito pelo dono do repositório (Analytical12).
 
-## 1. Decisões comerciais que bloqueiam cada oferta
+## 1. Estado de cada página e oferta
 
-Tudo é editado em `src/config/offers.ts` e `src/config/contacts.ts`. Uma oferta só vira botão de compra, entra no menu/sitemap e é indexada quando estiver `status: "published"` com checkout (ou contato) confirmado.
+| Rota | Página implementada | Revisada (visual e conteúdo) | Oferta comercial liberada | Pagamento/entrega testados |
+|---|---|---|---|---|
+| `/` | Sim | Sim | — | — |
+| `/nr1` | Sim | Sim | Sim (contato comercial) | — |
+| `/perfil-e-proposito` | Sim | Sim | Sim (checkout `pvcyogot`) | **Não** (pagamento e entrega não testados) |
+| `/analise-comportamental` | Sim | Sim | Não: falta o canal de contato | — |
+| `/advento/familia` | Sim | Sim | Não: faltam checkout e preço | Não |
+| `/advento/igrejas` | Sim | Sim | Não: faltam checkout, preço e licença | Não |
+| `/advento` | Sim | Sim | Depende das edições | — |
 
-### Advento Família (`advento_familia`)
-- [ ] URL do checkout da edição Família → `checkout: { url, platform, forwardUtm: false }`
-- [ ] Preço confirmado (hoje R$ 59,90 é valor de trabalho) → `price.status: "current"`
-- [ ] Forma de entrega do PDF e canal de suporte da compra (ajustar a última pergunta do FAQ e remover o `pending`)
-- [ ] `status: "published"`
+Cada oferta é liberada de forma independente. Enquanto uma oferta não está liberada, na publicação: não há botão de compra ou contato; os botões que levam à seção da oferta dizem "Ver detalhes"; a página não entra no menu, na home nem no sitemap e recebe `noindex`; continua acessível por endereço direto. A regra está em `src/config/offers.ts` (`isSellable`, `isContactReady`, `isIndexable`) e `src/config/pages.ts` (`isPagePublishable`).
 
-### Advento Igrejas (`advento_igrejas`)
-- [ ] URL do checkout da edição Igrejas
-- [ ] Preço confirmado (hoje R$ 49,90 provisório)
-- [ ] Termos de licença por igreja / congregação / filial (o PDF, p. 2, não define) → texto do FAQ e do bloco "Uso do material"
-- [ ] Forma de entrega: o manual (p. 15) diz que o material completo sai a partir da 3ª semana → responder "Quando recebo o material completo?"
-- [ ] Corrigir no PDF o período da semana 3 ("29/11/26 a 15/11/26", pp. 66, 67, 70, 75)
-- [ ] `status: "published"`
+## 2. Campos comerciais a preencher
 
-### Análise comportamental (`analise_comportamental`)
-- [ ] Número de WhatsApp (ou outro canal) para agendamento → `contacts.analiseWhatsApp` com `number`, `display` e `status: "confirmed"`. O site antigo tem três números diferentes (ver nota no arquivo).
-- [ ] (Opcional) Autorização dos depoimentos → `approved: true` em `src/config/testimonials.ts`
-- [ ] (Opcional) Duração, valores e formato, se forem ser publicados
+Arquivo principal: `src/config/offers.ts` (objeto `offers`).
 
-### Combo Perfil e Propósito (`combo_perfil_proposito`) — já liberado
-- [ ] Confirmar que `chk.eduzz.com/pvcyogot` é o checkout vigente (o `/365dias/` antigo usa `G9618Q4YW1`)
-- [ ] Confirmar R$ 97,00 no checkout
-- [ ] Decidir extras antigos (live mensal, testes, exercícios, garantia de 7 dias) → `comboExtras.approved` em `src/content/perfil-e-proposito.ts`
-- [ ] Canal de suporte para compradores
+### Advento Família — `offers.advento_familia`
+
+| Campo | Hoje | Valor esperado |
+|---|---|---|
+| `checkout` | `null` | `{ url: "https://…", platform: "<nome da plataforma>", forwardUtm: false }` com a URL do checkout **da edição Família**. Nunca o `chk.eduzz.com/pvcyogot` do combo |
+| `price.amount` | `59.9` (valor de trabalho) | preço confirmado, número com ponto decimal (ex.: `59.9`) |
+| `price.status` | `"working"` | `"current"` |
+| `price.source` | "Valor de trabalho…" | origem da confirmação |
+| `status` | `"pending"` | `"published"` |
+
+**Libera a compra**: `status: "published"` **e** `checkout.url` https válido. Depois, em `src/app/(site)/advento/familia/page.tsx`, na pergunta "Como recebo o acesso e a quem peço ajuda?", ajustar `a` à entrega real e remover `pending`.
+
+### Advento Igrejas — `offers.advento_igrejas`
+
+| Campo | Hoje | Valor esperado |
+|---|---|---|
+| `checkout` | `null` | `{ url: "https://…", platform: "…", forwardUtm: false }` com a URL **da edição Igrejas** |
+| `price.amount` | `49.9` (provisório) | preço confirmado |
+| `price.status` | `"provisional"` | `"current"` |
+| `status` | `"pending"` | `"published"` |
+
+**Libera a compra**: `status: "published"` e checkout válido. Em `src/app/(site)/advento/igrejas/page.tsx`: texto de licença aprovado no `OfferPanel` (`license`) removendo `licensePending`; pergunta "Posso compartilhar o PDF…" com o texto aprovado e sem `pending`; pergunta "Como recebo o acesso…" ajustada à entrega real e sem `pending`.
+
+### Análise comportamental — `src/config/contacts.ts`, `contacts.analiseWhatsApp`
+
+| Campo | Hoje | Valor esperado |
+|---|---|---|
+| `number` | `null` | só dígitos, com DDI e DDD (formato `55DDNNNNNNNNN`) |
+| `display` | `null` | `"+55 (DD) NNNNN-NNNN"` |
+| `status` | `"pending"` | `"confirmed"` |
+| `source` | "Aguardando confirmação." | quem confirmou e quando |
+
+**Libera o contato**: `status: "confirmed"` com `number` preenchido (`offers.analise_comportamental.status` já é `"published"`). Os depoimentos continuam ocultos até `approved: true` em `src/config/testimonials.ts` (opcional).
+
+### Combo Perfil e Propósito — já liberado
+
+Confirmações recomendadas, sem bloquear: checkout vigente (`pvcyogot` × `G9618Q4YW1` do `/365dias/` antigo); R$ 97,00 no checkout; extras antigos (`comboExtras.approved` em `src/content/perfil-e-proposito.ts`); canal de suporte ao comprador.
 
 ### NR-1 — já liberada
-- [ ] Confirmar "há 12 anos" em Sobre Carla (outras páginas antigas citam 8, 20 e 23 anos)
-- [ ] Revisar as descrições das etapas 06 a 08 de "Como funciona" (parecem deslocadas uma posição em relação aos títulos; mantidas como estavam)
 
-## 2. Verificações técnicas antes do merge
+Confirmar "há 12 anos" em Sobre Carla (outras páginas antigas citam 8, 20 e 23 anos) e revisar as descrições das etapas 06 a 08 de "Como funciona".
+
+### Pendências editoriais dos PDFs (não mudam o site e não são decisões comerciais)
+
+- Igreja, pp. 66, 67, 70 e 75: período da semana 3 ("29/11/26 a 15/11/26"). O site mostra "a partir de 29 de novembro".
+- Igreja, p. 15: menção ao material completo "a partir da 3ª semana". Conferir se o trecho permanece na versão final; o site não trata isso como entrega parcelada.
+- Família, p. 79: atividade cita filme "na igreja" num dia vivido em casa.
+
+## 3. Verificações técnicas antes do merge
 
 ```bash
 npm ci
@@ -51,7 +84,7 @@ npm test
 - [ ] Conferir a preview em 360, 390, 768 e 1366 px
 - [ ] Na Vercel, confirmar que a branch de produção é `main` e que não há `NEXT_PUBLIC_SITE_MODE=review` definido em Production
 
-## 3. Publicação
+## 4. Publicação
 
 - [ ] Merge em `main` (dispara produção)
 - [ ] Conferir: `/`, `/nr1`, `/perfil-e-proposito`, `/sitemap.xml`, `/robots.txt`
@@ -59,11 +92,11 @@ npm test
 - [ ] Um link antigo como `https://www.carlagerhard.com/#drps` leva a `/nr1#drps`
 - [ ] Enviar o sitemap no Google Search Console
 
-## 4. Depois da publicação (etapas separadas)
+## 5. Depois da publicação (etapas separadas)
 
 - [ ] Política de privacidade e termos no novo site
 - [ ] Medição: `docs/RASTREAMENTO_PARA_CLAUDE.md`
-- [ ] Domínio sem www (`carlagerhard.com`) apontando para a Vercel (mudança de DNS)
+- [ ] Domínio sem www (`carlagerhard.com`) apontando para a Vercel: `docs/DOMINIO.md`
 - [ ] Migração do `.com.br`: `docs/MIGRACAO_COM_BR.md`
 
 ## Rollback

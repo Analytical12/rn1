@@ -7,7 +7,7 @@ Nada foi alterado no WordPress, no DNS ou nos checkouts. Este é o mapa para uma
 | Host | Hoje | Observação |
 |---|---|---|
 | `https://www.carlagerhard.com` | Vercel, site NR-1 (este repositório, branch `main`) | Host canônico do novo site. |
-| `carlagerhard.com` (sem www) | Página "Parked Domain" da Hostinger em HTTP; HTTPS não responde | Quem digita o domínio sem www não chega ao site. Recomendação: apontar o apex para a Vercel e redirecionar para `www`. **Exige mudança de DNS: não feita.** |
+| `carlagerhard.com` (sem www) | Página "Parked Domain" da Hostinger em HTTP; HTTPS não responde | Quem digita o domínio sem www não chega ao site. Preparação e passos em `DOMINIO.md` (mudança de DNS não feita). |
 | `carlagerhard.com.br` | WordPress (LiteSpeed). `www.` redireciona para sem www | Mantido intacto nesta entrega. |
 
 ## Mapa de URLs (proposta)

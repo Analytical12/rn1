@@ -16,6 +16,16 @@ const nextConfig: NextConfig = {
   trailingSlash: false,
   async redirects() {
     return [
+      // Domínio sem www -> host principal, preservando caminho e query string.
+      // Só tem efeito quando carlagerhard.com apontar para este projeto na Vercel
+      // (ver docs/DOMINIO.md). O redirecionamento de domínio no painel da Vercel
+      // faz o mesmo antes de chegar aqui; os dois não conflitam.
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "carlagerhard.com" }],
+        destination: "https://www.carlagerhard.com/:path*",
+        permanent: true,
+      },
       // Aliases discutidos antes da arquitetura final. Permanentes (308).
       { source: "/advento-familia", destination: "/advento/familia", permanent: true },
       { source: "/advento-igrejas", destination: "/advento/igrejas", permanent: true },

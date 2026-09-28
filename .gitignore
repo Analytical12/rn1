@@ -33,3 +33,6 @@ yarn-error.log*
 *.pdf
 /private/
 /source-materials/
+
+# Capturas de revisão visual (locais, não versionar)
+/qa-capturas/
